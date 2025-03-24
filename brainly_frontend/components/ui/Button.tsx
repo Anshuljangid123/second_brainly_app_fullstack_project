@@ -1,22 +1,22 @@
+import { ReactElement } from "react";
 
-
-type Variant = "primary" | "secondary";
+type Variants = "primary" | "secondary";
 
 export interface ButtonProps {
-    variant : "primary" | "secondary";
+    variant : Variants;
     size : "sm" |  "md" | "lg";
     text : string ;
-    startIcon ?: any; // optional 
-    endIcon ?: any;
+    startIcon ?: ReactElement; // optional 
+    endIcon ?: ReactElement;
     onClick : () => void ;
 }
 
 const variantStyles ={
     "primary" : "bg-purple-600 text-white ",
-    "secondary" : "bg-purple-400  text-purple-600"
+    "secondary" : "bg-purple-400  text-purple-800"
 }
 
-const defaultStyles = "rounded-md p-4 flex";
+const defaultStyles = "rounded-md p-4 flex item-center";
 
 const sizeStyles = {
     "sm" : "py-2 px-2 ",
@@ -28,8 +28,16 @@ export const Button = (props : ButtonProps) =>{
     //props.onClick
 
 
-    return <button className={`${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`}> 
-        {props.startIcon ? <div className="pr-2">{props.startIcon}</div> : null } {props.text} {props.endIcon}
+    return <button className={`${variantStyles[props.variant]} ${defaultStyles} ${sizeStyles[props.size]}`}  onClick={props.onClick} > 
+        <div className="flex">
+            {props.startIcon ? <div className="pr-2">{props.startIcon}</div> : null } 
+            <div className="pl-2 pr-2">
+                {props.text} 
+            </div>
+            
+            {props.endIcon}
+        </div>
+        
     </button>
 }
 
