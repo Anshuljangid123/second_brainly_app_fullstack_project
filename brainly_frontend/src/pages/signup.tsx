@@ -3,22 +3,24 @@ import { Button } from "../components/Button";
 import { Input } from "../components/input";
 import axios from "axios";
 import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
 export function Signup(){
     const usernameRef = useRef<HTMLInputElement>(null) ;
     const passwrodRef = useRef<HTMLInputElement>(null);
+    const navigate = useNavigate();
 
     function signup(){
         const username = usernameRef.current?.value;
         const password = passwrodRef.current?.value;
 
         axios.post(BACKEND_URL + "/api/v1/signup" , {
-            data : {
-                username , 
-                password 
-            }
+            username , 
+            password 
         });
-        alert("you have signed in ");
+        navigate("/signin")
+        alert("you have signed up as a new user  ");
+        
     }
 
 

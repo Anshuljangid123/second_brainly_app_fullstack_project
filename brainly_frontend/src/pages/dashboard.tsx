@@ -7,10 +7,14 @@ import { CreateContentModel } from '../components/CreateContent';
 import { PlusIcon } from '../icons/plus_icon';
 import { ShareIcon } from '../icons/share_icon';
 import { SideBar } from '../components/Sidebar';
-
+import { useContent } from '../hooks/useContent';
 
 function Dashboard() {
   const [modalOpen , setModelOpen] = useState(false);
+  const contents  = useContent();
+  // get the cards from backend .
+  // can be done with or without recoil .
+
 
   return (
     <>
@@ -35,8 +39,13 @@ function Dashboard() {
           <br/>
 
           <div className='flex gap-4'>
-          <Card title='first tweet' type='twitter' link="https://x.com/Cometml/status/1864024806280007837" />
-          <Card title='first video' type='youtube' link="https://www.youtube.com/watch?v=ShzMLpqwdsk" />
+              {(contents) .map(({type ,link , title}) => <Card
+                 type ={type} 
+                 link = {link}
+                 title = {title}
+              />)}
+          {/* <Card title='first tweet' type='twitter' link="https://x.com/Cometml/status/1864024806280007837" />
+          <Card title='first video' type='youtube' link="https://www.youtube.com/watch?v=ShzMLpqwdsk" /> */}
           </div>
 
         </div>
